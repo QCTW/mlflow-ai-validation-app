@@ -1,0 +1,45 @@
+================================================================================
+PROMPT 02: FULL-STACK REQUIREMENTS GATHERING
+================================================================================
+
+USER REQUEST:
+"Full-stack React with MLflow integration on the backend"
+
+REQUIREMENTS ANALYSIS:
+1. Architecture: Full-stack application
+2. Frontend: React framework
+3. Backend: Node.js/Express (inferred from context)
+4. Integration: MLflow tracking server via REST API
+5. Purpose: Based on repo name, create validation interface for AI models
+
+AI UNDERSTANDING:
+- Need separate client and server directories
+- Backend will communicate with MLflow REST API
+- Frontend will communicate with backend API
+- Validation workflow between end users and AI engineers
+
+TECHNICAL DECISIONS MADE:
+1. Build tool for React: Vite (modern, fast)
+2. Backend framework: Express (lightweight, flexible)
+3. API communication: Axios (both frontend and backend)
+4. Routing: React Router for frontend navigation
+5. CORS: Enabled for cross-origin requests
+
+PROJECT STRUCTURE PLANNED:
+Root/
+├── server/           # Backend Express application
+│   ├── routes/       # API endpoints
+│   ├── services/     # Business logic, MLflow integration
+│   └── server.js     # Main server file
+├── client/           # Frontend React application
+│   └── src/
+│       ├── pages/    # Page components
+│       ├── services/ # API client
+│       └── components/
+└── package.json      # Root dependencies and scripts
+
+NEXT STEPS:
+1. Install backend dependencies
+2. Create server structure
+3. Set up React frontend
+4. Configure development workflow

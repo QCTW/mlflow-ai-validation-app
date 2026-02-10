@@ -1,0 +1,146 @@
+================================================================================
+PROMPT 11: NPM SCRIPTS CONFIGURATION
+================================================================================
+
+OBJECTIVE:
+Configure package.json scripts for optimal development and build workflows
+
+FILE: package.json (Root)
+
+SCRIPTS ADDED:
+
+1. "server": "nodemon server/server.js"
+   Purpose: Run backend server with auto-reload
+   How it works:
+   - nodemon watches server/ directory
+   - Automatically restarts on file changes
+   - Great for development
+   Usage: npm run server
+
+2. "client": "cd client && npm run dev"
+   Purpose: Run frontend dev server
+   How it works:
+   - Changes to client directory
+   - Runs Vite dev server
+   - Hot Module Replacement enabled
+   - Opens browser automatically
+   Usage: npm run client
+
+3. "dev": "concurrently \"npm run server\" \"npm run client\""
+   Purpose: Run both frontend and backend simultaneously
+   How it works:
+   - concurrently package runs multiple commands
+   - Both servers start with one command
+   - Output from both visible in terminal
+   - Colored output for clarity
+   Usage: npm run dev
+   BENEFIT: Best developer experience
+
+4. "install-all": "npm install && cd client && npm install"
+   Purpose: Install all dependencies (root and client)
+   How it works:
+   - Installs root dependencies first
+   - Then navigates to client
+   - Installs client dependencies
+   Usage: npm run install-all
+   BENEFIT: Easy onboarding for new developers
+
+5. "build": "cd client && npm run build"
+   Purpose: Build production frontend bundle
+   How it works:
+   - Navigates to client directory
+   - Runs Vite build command
+   - Creates optimized bundle in client/dist/
+   - Minified, tree-shaken, code-split
+   Usage: npm run build
+   BENEFIT: Production deployment preparation
+
+6. "test": "echo \"Error: no test specified\" && exit 1"
+   Purpose: Placeholder for future tests
+   Status: Not implemented yet
+   Future: Could run Jest, Mocha, or other test framework
+
+WORKFLOW PATTERNS:
+
+First Time Setup:
+```
+git clone <repo>
+npm run install-all
+cp .env.example .env
+cd client && cp .env.example .env
+npm run dev
+```
+
+Daily Development:
+```
+npm run dev
+# Make changes
+# Both servers auto-reload
+```
+
+Separate Server Testing:
+```
+# Terminal 1
+npm run server
+
+# Terminal 2
+npm run client
+```
+
+Production Build:
+```
+npm run build
+# Serve client/dist/ with production server
+```
+
+CONCURRENTLY OUTPUT:
+- [0] prefix: server output
+- [1] prefix: client output
+- Different colors for each process
+- Exit on any process failure (optional)
+
+NODEMON CONFIGURATION:
+- Default: Watches all files in current directory
+- Ignores: node_modules, .git
+- Restarts on .js file changes
+- Can be configured with nodemon.json if needed
+
+VITE DEV SERVER:
+- Port: 5173
+- Hot Module Replacement (HMR)
+- Fast refresh for React
+- Instant feedback on changes
+
+BENEFITS:
+
+1. Developer Experience
+   - Single command to start everything
+   - Auto-reload on both frontend and backend
+   - Fast iteration cycle
+
+2. Consistency
+   - Same commands for all developers
+   - Documented in package.json
+   - No need to remember complex commands
+
+3. Onboarding
+   - install-all makes setup trivial
+   - Clear script names (self-documenting)
+
+4. Production Ready
+   - Build script for deployment
+   - Separation of dev and production workflows
+
+5. Extensibility
+   - Easy to add more scripts
+   - Can add testing, linting, etc.
+
+FUTURE ENHANCEMENTS:
+- Add "lint" script for ESLint
+- Add "format" script for Prettier
+- Add "test" script for Jest
+- Add "deploy" script for production deployment
+- Add "docker:build" for containerization
+
+NEXT STEP:
+Update README.md with comprehensive documentation

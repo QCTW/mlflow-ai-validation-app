@@ -1,0 +1,115 @@
+================================================================================
+PROMPT 04: BACKEND STRUCTURE CREATION
+================================================================================
+
+OBJECTIVE:
+Create Express server with MLflow integration using service layer pattern
+
+DIRECTORY STRUCTURE:
+server/
+├── routes/          # Route handlers for API endpoints
+├── services/        # Business logic and external API integration
+└── middleware/      # Custom middleware (prepared for future)
+
+FILE 1: server/server.js
+Purpose: Main Express application setup
+Features:
+- Import and configure express
+- Enable CORS for frontend communication
+- Parse JSON and URL-encoded bodies
+- Mount route modules
+- Create health check endpoint
+- Implement error handling middleware
+- Start server on configured port
+
+Key Code Patterns:
+- Environment variable for PORT (default 5000)
+- Modular route imports
+- Centralized error handling
+- Console logging for server start
+
+FILE 2: server/services/mlflowService.js
+Purpose: Encapsulate all MLflow API interactions
+Architecture: Service Layer Pattern
+
+Methods Implemented:
+- getExperiments() - List all experiments
+- getExperiment(id) - Get single experiment
+- searchRuns(experimentIds, filter, maxResults) - Search runs
+- getRun(runId) - Get single run
+- getModelVersions(modelName) - List model versions
+- updateRunTag(runId, key, value) - Update run tags (for validation)
+
+Key Patterns:
+- Singleton pattern (export instance)
+- Constructor reads MLFLOW_TRACKING_URI from env
+- All methods use async/await
+- Try-catch error handling in each method
+- Console logging for errors
+- Axios for HTTP requests to MLflow API
+
+MLflow API Endpoints Used:
+- GET /api/2.0/mlflow/experiments/search
+- GET /api/2.0/mlflow/experiments/get
+- POST /api/2.0/mlflow/runs/search
+- GET /api/2.0/mlflow/runs/get
+- GET /api/2.0/mlflow/model-versions/search
+- POST /api/2.0/mlflow/runs/set-tag
+
+FILE 3: server/routes/mlflow.js
+Purpose: REST API routes for MLflow operations
+Pattern: Express Router
+
+Endpoints:
+- GET /experiments - List all experiments
+- GET /experiments/:id - Get experiment by ID
+- POST /runs/search - Search runs with filters
+- GET /runs/:id - Get run details
+- GET /models/:name/versions - Get model versions
+
+Pattern Used:
+- Async route handlers
+- Delegate to mlflowService
+- Return JSON responses
+- 500 status code on errors
+- Error message in response body
+
+FILE 4: server/routes/validation.js
+Purpose: Validation workflow management
+Pattern: Express Router
+
+Endpoints:
+- POST /submit
+  Input: { runId, status, comments, userId }
+  Action: Store validation as MLflow run tags
+  Tags: validation.status, validation.comments, validation.user, validation.timestamp
+
+- GET /status/:runId
+  Output: Validation data extracted from run tags
+
+- GET /pending
+  Input: experimentIds (query param)
+  Output: Runs without validation.status tag or status='pending'
+
+Key Logic:
+- Use MLflow tags as storage mechanism
+- No separate database needed
+- ISO timestamp for validation time
+- Filter logic for pending validations
+
+FILE 5: .env.example
+Purpose: Template for environment configuration
+Variables:
+- PORT=5000
+- MLFLOW_TRACKING_URI=http://localhost:5000
+- FRONTEND_URL=http://localhost:5173
+
+ARCHITECTURAL BENEFITS:
+1. Separation of Concerns: Routes, services, middleware in separate files
+2. Testability: Service layer can be mocked
+3. Reusability: MLflow service can be used by multiple routes
+4. Maintainability: Clear structure for future developers
+5. Scalability: Easy to add new routes and services
+
+NEXT STEP:
+Set up React frontend with Vite

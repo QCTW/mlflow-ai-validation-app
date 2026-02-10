@@ -1,0 +1,74 @@
+================================================================================
+PROMPT 06: FRONTEND API SERVICE LAYER
+================================================================================
+
+OBJECTIVE:
+Create centralized API client for all backend communication
+
+FILE: client/src/services/api.js
+
+ARCHITECTURE PATTERN: API Client Pattern
+
+KEY FEATURES:
+
+1. Axios Instance Creation
+   - Base URL from environment variable: VITE_API_URL
+   - Fallback to localhost:5000/api if not set
+   - Pre-configured JSON content-type header
+
+2. Modular API Organization
+   - Separate namespaces for different API categories
+   - mlflowAPI: MLflow-related endpoints
+   - validationAPI: Validation workflow endpoints
+
+3. MLflow API Module
+   Methods:
+   - getExperiments() → GET /api/mlflow/experiments
+   - getExperiment(id) → GET /api/mlflow/experiments/:id
+   - searchRuns(experimentIds, filter, maxResults) → POST /api/mlflow/runs/search
+   - getRun(id) → GET /api/mlflow/runs/:id
+   - getModelVersions(name) → GET /api/mlflow/models/:name/versions
+
+4. Validation API Module
+   Methods:
+   - submitValidation(data) → POST /api/validation/submit
+   - getValidationStatus(runId) → GET /api/validation/status/:runId
+   - getPendingValidations(experimentIds) → GET /api/validation/pending
+
+5. Utility Functions
+   - healthCheck() → GET /api/health
+
+BENEFITS:
+
+1. Single Source of Truth
+   - All API endpoints defined in one place
+   - Easy to update base URL for different environments
+
+2. Type Safety (Future)
+   - Easy to add TypeScript types
+   - Clear function signatures
+
+3. Error Handling
+   - Centralized error handling possible
+   - Can add interceptors for auth, logging, etc.
+
+4. Testing
+   - Easy to mock API calls
+   - Can replace with mock implementation
+
+5. Maintainability
+   - When backend API changes, update in one place
+   - Clear separation from UI components
+
+USAGE PATTERN IN COMPONENTS:
+import { mlflowAPI, validationAPI } from '../services/api';
+
+// In component
+const data = await mlflowAPI.getExperiments();
+
+ENVIRONMENT CONFIGURATION:
+Create client/.env.example with:
+VITE_API_URL=http://localhost:5000/api
+
+NEXT STEP:
+Create page components that use this API service

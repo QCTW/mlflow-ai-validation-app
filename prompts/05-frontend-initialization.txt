@@ -1,0 +1,66 @@
+================================================================================
+PROMPT 05: FRONTEND INITIALIZATION WITH VITE
+================================================================================
+
+OBJECTIVE:
+Create React application using Vite build tool
+
+WHY VITE:
+- Extremely fast development server
+- Hot Module Replacement (HMR) out of the box
+- Modern JavaScript features supported
+- Optimized production builds
+- Better developer experience than Create React App
+
+COMMAND EXECUTED:
+npm create vite@latest client -- --template react
+
+PARAMETERS:
+- client: Directory name for frontend
+- --template react: Use official React template
+
+OUTPUT:
+- client/ directory created
+- React app scaffolded with:
+  * package.json
+  * index.html
+  * src/App.jsx
+  * src/main.jsx
+  * src/App.css
+  * src/index.css
+  * vite.config.js
+  * .eslintrc.cjs
+
+ADDITIONAL DEPENDENCIES INSTALLED:
+1. Base dependencies (npm install in client/)
+   - react
+   - react-dom
+   - Vite dev dependencies
+
+2. Routing and HTTP client:
+   npm install react-router-dom axios
+
+   react-router-dom: Client-side routing
+   - Navigate between pages without page reload
+   - URL parameter extraction
+   - Programmatic navigation
+
+   axios: HTTP client
+   - Promise-based API
+   - Request/response interceptors
+   - Better error handling than fetch
+
+DIRECTORY STRUCTURE CREATED:
+client/src/
+├── services/    # API client layer
+├── components/  # Reusable UI components
+└── pages/       # Page-level components
+
+VITE CONFIGURATION:
+- Default port: 5173
+- Environment variables prefix: VITE_
+- Fast refresh for React components
+- Optimized for ES modules
+
+NEXT STEP:
+Create API service layer for backend communication

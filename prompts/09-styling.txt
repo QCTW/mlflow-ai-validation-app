@@ -1,0 +1,127 @@
+================================================================================
+PROMPT 09: STYLING AND UI DESIGN
+================================================================================
+
+OBJECTIVE:
+Create modern, professional styling for the application
+
+FILE: client/src/App.css
+
+APPROACH: Complete redesign, removing all Vite default styles
+
+DESIGN SYSTEM:
+
+1. Color Palette
+   - Dark navy: #1e293b (navbar, footer)
+   - Blue accent: #60a5fa (primary actions, links)
+   - Light gray: #f8fafc (card backgrounds)
+   - Border gray: #e2e8f0 (borders, dividers)
+   - Text colors: #1e293b (headings), #334155 (body)
+   - Error red: #ef4444
+
+2. Layout System
+   - Flexbox for main layout
+   - CSS Grid for card arrangements
+   - Max-width: 1200px for content
+   - Full viewport height utilization
+
+3. Component Styling
+
+   APP LAYOUT:
+   - .app: Flex column, min-height 100vh
+   - Main content: flex: 1 (takes remaining space)
+   - Footer: Sticky to bottom
+
+   NAVBAR:
+   - Dark background with subtle shadow
+   - Horizontal layout with space-between
+   - Logo in blue accent color
+   - Navigation links with hover effects
+   - Color transition on hover: 0.2s
+
+   CARDS (Experiments, Runs):
+   - Light background with border
+   - Border-radius: 8px (rounded corners)
+   - Padding: 1.5rem
+   - Hover effect: Box shadow elevation
+   - Transition: 0.2s for smooth hover
+
+   GRID LAYOUTS:
+   - Grid template columns: repeat(auto-fill, minmax(300px, 1fr))
+   - Gap: 1rem between cards
+   - Responsive: Automatically adjusts columns
+
+   BUTTONS:
+   - Primary: Blue background (#60a5fa)
+   - Hover: Darker blue (#3b82f6)
+   - Padding: 0.5rem 1rem (buttons), 0.75rem 1.5rem (form)
+   - Border-radius: 4px
+   - Transition: background 0.2s
+   - Disabled state: Gray (#cbd5e1), no pointer
+
+   TABLES:
+   - Full width, collapsed borders
+   - Header: Light gray background
+   - Rows: Bottom border only
+   - Padding: 0.75rem
+   - Left-aligned text
+
+   FORMS:
+   - Form groups: margin-bottom 1.5rem
+   - Labels: Block, margin-bottom 0.5rem, medium weight
+   - Inputs/Select/Textarea:
+     * Full width
+     * Padding: 0.75rem
+     * Border: 1px solid light gray
+     * Border-radius: 4px
+     * Font-size: 1rem
+
+   FORM ACTIONS:
+   - Flexbox with gap
+   - Right-aligned (justify-content: flex-end)
+   - Submit button: Blue
+   - Cancel button: Gray
+
+4. Sections
+   - experiments-section, pending-section: margin-bottom 3rem
+   - Section titles: margin-bottom 2rem
+
+5. States
+   - Loading: Center-aligned, padding 2rem, larger font
+   - Error: Same as loading but red color
+
+6. Footer
+   - Dark background matching navbar
+   - Light text color
+   - Center-aligned
+   - Padding: 1.5rem
+   - Margin-top: auto (pushes to bottom)
+
+RESPONSIVE DESIGN:
+- Grid automatically adjusts columns based on screen width
+- Min-width: 300px for cards ensures readability on mobile
+- Max-width: 1200px for content prevents too-wide layouts
+
+TYPOGRAPHY:
+- Font sizes: 1rem base, 1.2rem for sections, 1.5rem for nav logo
+- Line heights: Default browser settings (readable)
+- Font weights: 500 (medium) for labels, 600 (semi-bold) for table headers
+
+SPACING SYSTEM:
+- 0.5rem, 0.75rem, 1rem, 1.5rem, 2rem, 3rem
+- Consistent spacing throughout
+
+INTERACTIONS:
+- Hover effects on buttons, links, cards
+- Smooth transitions (0.2s)
+- Clear disabled states
+- Focus states (browser defaults)
+
+ACCESSIBILITY CONSIDERATIONS:
+- Sufficient color contrast
+- Focus indicators (browser default)
+- Readable font sizes
+- Clear button states
+
+NEXT STEP:
+Create environment configuration files

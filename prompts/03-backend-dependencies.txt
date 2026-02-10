@@ -1,0 +1,49 @@
+================================================================================
+PROMPT 03: BACKEND DEPENDENCIES INSTALLATION
+================================================================================
+
+OBJECTIVE:
+Install necessary Node.js packages for backend server with MLflow integration
+
+PRODUCTION DEPENDENCIES REQUIRED:
+
+1. express
+   Purpose: Web application framework
+   Why: Industry standard, minimal, flexible for REST APIs
+
+2. cors
+   Purpose: Enable Cross-Origin Resource Sharing
+   Why: Frontend (localhost:5173) needs to communicate with backend (localhost:5000)
+
+3. dotenv
+   Purpose: Load environment variables from .env file
+   Why: Secure configuration management (MLflow URI, ports, etc.)
+
+4. axios
+   Purpose: HTTP client
+   Why: Make requests to MLflow REST API from backend
+
+DEVELOPMENT DEPENDENCIES REQUIRED:
+
+1. nodemon
+   Purpose: Auto-restart server on file changes
+   Why: Improves developer experience during development
+
+2. concurrently
+   Purpose: Run multiple npm scripts simultaneously
+   Why: Run both frontend and backend with single command
+
+COMMANDS EXECUTED:
+npm install express cors dotenv axios
+npm install --save-dev nodemon concurrently
+
+OUTCOME:
+- 79 production packages installed
+- 52 dev packages installed
+- 0 vulnerabilities
+- package.json updated with dependencies
+- node_modules/ directory created
+- package-lock.json generated
+
+NEXT STEP:
+Create backend directory structure and server files

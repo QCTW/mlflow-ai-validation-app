@@ -1,0 +1,32 @@
+================================================================================
+PROMPT 01: PROJECT INITIALIZATION
+================================================================================
+
+USER REQUEST:
+/init
+
+CONTEXT:
+- User wants to initialize a new project
+- Current directory is empty except for README.md, LICENSE, .gitignore
+- Git repository already initialized
+
+AI RESPONSE APPROACH:
+1. Explore current directory to understand state
+2. Ask user what type of project they want to initialize
+3. Offer common options: Python, Node.js, Rust, Go, Java, etc.
+4. Wait for user's choice before proceeding
+
+USER SELECTION:
+Node.js
+
+AI ACTION:
+Execute npm init -y to create package.json with default values
+
+OUTCOME:
+- package.json created with project metadata
+- Project name: mlflow-ai-validation-app
+- Description pulled from README.md automatically
+- Basic Node.js project structure established
+
+NEXT STEP:
+Ask user about specific technology stack preferences

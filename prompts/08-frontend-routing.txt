@@ -1,0 +1,97 @@
+================================================================================
+PROMPT 08: FRONTEND ROUTING AND LAYOUT
+================================================================================
+
+OBJECTIVE:
+Implement React Router and application layout structure
+
+FILE: client/src/App.jsx
+
+CHANGES: Complete replacement of default Vite template
+
+NEW STRUCTURE:
+
+1. Router Setup
+   Component: BrowserRouter (aliased as Router)
+   Purpose: Enable client-side routing
+
+2. Application Layout
+   Structure:
+   - Navbar (persistent across all pages)
+   - Main content area (changes based on route)
+   - Footer (persistent across all pages)
+
+3. Navbar Component (Inline)
+   Elements:
+   - Logo/Brand: "MLflow AI Validation" (links to home)
+   - Navigation links:
+     * Dashboard (links to /)
+
+   Styling Classes:
+   - .navbar: Container
+   - .nav-content: Centered content wrapper
+   - .logo: Brand text
+   - .nav-links: Navigation items
+
+   Pattern: React Router Link component for navigation
+
+4. Main Content Area
+   Component: <main className="main-content">
+
+   Routes Configuration:
+   - Path: "/" → Element: <Dashboard />
+   - Path: "/validate/:runId" → Element: <Validation />
+
+   Pattern: React Router v6 syntax
+   - Routes wrapper component
+   - Route components with path and element props
+   - Dynamic parameter: :runId
+
+5. Footer Component (Inline)
+   Content: "MLflow AI Validation App - Connect end users with AI engineers"
+   Class: .footer
+
+LAYOUT PATTERN:
+<Router>
+  <div className="app">
+    <nav>...</nav>
+    <main>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/validate/:runId" element={<Validation />} />
+      </Routes>
+    </main>
+    <footer>...</footer>
+  </div>
+</Router>
+
+IMPORTS ADDED:
+- BrowserRouter, Routes, Route, Link from 'react-router-dom'
+- Dashboard from './pages/Dashboard'
+- Validation from './pages/Validation'
+
+REMOVED:
+- All default Vite template code
+- Logo imports
+- Counter demo code
+
+BENEFITS:
+
+1. SPA Experience
+   - No page reloads on navigation
+   - Fast transitions between pages
+
+2. Clean URLs
+   - /validate/abc123 instead of /validate?id=abc123
+   - RESTful URL structure
+
+3. Persistent Layout
+   - Navbar and footer stay mounted
+   - Only main content changes
+
+4. Navigation History
+   - Browser back/forward buttons work
+   - Programmatic navigation possible
+
+NEXT STEP:
+Update CSS for new layout and styling

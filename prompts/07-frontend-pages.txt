@@ -1,0 +1,137 @@
+================================================================================
+PROMPT 07: FRONTEND PAGE COMPONENTS
+================================================================================
+
+OBJECTIVE:
+Create main page components for the application
+
+FILE 1: client/src/pages/Dashboard.jsx
+
+PURPOSE: Main landing page showing experiments and pending validations
+
+COMPONENT STRUCTURE:
+- Functional component using React Hooks
+- State management: useState for experiments, pendingRuns, loading, error
+- Side effects: useEffect for initial data loading
+- Navigation: useNavigate for routing
+
+STATE VARIABLES:
+- experiments: Array of MLflow experiments
+- pendingRuns: Array of runs awaiting validation
+- loading: Boolean for loading state
+- error: String for error messages
+
+LIFECYCLE:
+1. Component mounts
+2. useEffect triggers loadData()
+3. Fetch experiments from API
+4. Extract experiment IDs
+5. Fetch pending validations
+6. Update state with data
+7. Handle loading and error states
+
+UI SECTIONS:
+
+1. Experiments Section
+   - Title: "Experiments"
+   - Grid layout of experiment cards
+   - Each card shows: name, experiment_id
+   - Empty state: "No experiments found"
+
+2. Pending Validations Section
+   - Title: "Pending Validations (count)"
+   - Grid layout of run cards
+   - Each card shows:
+     * Run name/ID
+     * Experiment ID
+     * Status
+     * Validate button
+   - Button navigates to /validate/:runId
+   - Empty state: "No pending validations"
+
+3. States
+   - Loading: "Loading..." message
+   - Error: "Error: {message}" in red
+
+KEY PATTERNS:
+- Async/await for API calls
+- Try-catch error handling
+- Optional chaining (data?.experiments)
+- Conditional rendering
+- Array.map for lists
+
+
+FILE 2: client/src/pages/Validation.jsx
+
+PURPOSE: Detailed view for reviewing and validating a specific run
+
+COMPONENT STRUCTURE:
+- Extract runId from URL with useParams
+- Navigate programmatically with useNavigate
+- Form state management
+
+STATE VARIABLES:
+- run: Full run object from MLflow
+- loading: Boolean for loading state
+- error: String for error messages
+- status: Selected validation status (default: 'approved')
+- comments: Validation comments textarea
+- userId: User identifier
+- submitting: Boolean for form submission state
+
+LIFECYCLE:
+1. Component mounts
+2. Extract runId from URL params
+3. useEffect triggers loadRun()
+4. Fetch run details from API
+5. Display run information
+
+UI SECTIONS:
+
+1. Run Information
+   - Run ID, Name, Experiment ID
+   - Status (RUNNING, FINISHED, etc.)
+   - Start time (formatted)
+
+2. Metrics Table
+   - Two columns: Key, Value
+   - All metrics from run.data.metrics
+   - Empty state: "No metrics found"
+
+3. Parameters Table
+   - Two columns: Key, Value
+   - All params from run.data.params
+   - Empty state: "No parameters found"
+
+4. Validation Form
+   Fields:
+   - User ID: Text input (required)
+   - Status: Dropdown select
+     * Approved
+     * Rejected
+     * Needs Review
+   - Comments: Textarea (optional)
+
+   Actions:
+   - Cancel button: Navigate back to dashboard
+   - Submit button:
+     * Disabled during submission
+     * Shows "Submitting..." when active
+     * Calls API on submit
+     * Shows success alert
+     * Navigates back on success
+
+FORM HANDLING:
+- Controlled inputs (value from state, onChange updates state)
+- onSubmit: preventDefault, call API, handle response
+- Error handling with alert
+
+KEY PATTERNS:
+- URL parameter extraction: const { runId } = useParams()
+- Programmatic navigation: navigate('/')
+- Form submission: e.preventDefault()
+- Loading states for better UX
+- Table rendering from array data
+
+NEXT STEP:
+Update App.jsx to implement routing and layout
